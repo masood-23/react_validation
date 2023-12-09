@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React, { useState } from 'react';
+import AnotherComponent from './AnotherComponent'; // Import your other component
 
-function App() {
+import Validate from './Validate';
+
+export default function App() {
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = () => {
+    if (Validate()) {
+      setSubmitted(true);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="border">
+        {submitted ? (
+          <AnotherComponent />
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <h1>REGISTER HERE!</h1>
+            NAME:<input type='text' id='name' /><br />
+            EMAIL:<input type='email' id='email' /><br />
+            PASSWORD:<input type='password' id='pswd' /><br />
+            <input type="submit" id='btn' value='submit' />
+          </form>
+        )}
+      </div>
+    </>
   );
 }
-
-export default App;
